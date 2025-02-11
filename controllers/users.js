@@ -17,7 +17,7 @@ module.exports.register = async (req, res, next) => {
     console.log(accessToken, refreshToken)
     const options = {
         httpOnly: true,
-        secure: false
+        secure: true
     }
 
     const createdUser = await User.findById(user._id).select("-refreshToken");
@@ -79,7 +79,7 @@ module.exports.login = async (req, res) => {
 
     const options = {
         httpOnly: true,
-        secure: false
+        secure: true
     }
 
     return res
@@ -104,7 +104,7 @@ module.exports.logout = async (req, res) => {
 
     const options = {
         httpOnly: true,
-        secure: false
+        secure: true
     }
 
     return res.status(200)
@@ -137,7 +137,7 @@ module.exports.refreshtoken = async (req, res) => {
 
         const options = {
             httpOnly: true,
-            secure: false
+            secure: true
         }
 
         const { accessToken, refreshToken } = await generateAccessAndRefereshTokens(user._id);
