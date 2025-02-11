@@ -35,9 +35,8 @@ module.exports.verifyJwt = catchAsync(async (req, res, next) => {
 
 
 module.exports.validateCampground = (req, res, next) => {
-    console.log("hey", req.body)
     const { error } = campgroundSchema.validate(req.body);
-    console.log(error)
+    // console.log(error)
     if (error) {
         // console.log("error due to here")
         const msg = error.details.map(el => el.message).join(',')

@@ -1,12 +1,7 @@
 require("dotenv").config();
 const express = require('express');
 const mongoose = require('mongoose');
-const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
-const Campground = require("./models/camground")
-const Review = require('./models/review');
-const User = require("./models/user")
-const { campgroundSchema, reviewSchema } = require('./schemas.js');
 const cors = require('cors')
 const campgrounds = require('./routes/campgrounds');
 const reviews = require('./routes/reviews');
@@ -93,29 +88,6 @@ app.use(
 );
 
 
-const validateCampground = (req, res, next) => {
-    const { error } = campgroundSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    } else {
-        next();
-    }
-}
-
-const validateReview = (req, res, next) => {
-    const { error } = reviewSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    } else {
-        next();
-    }
-}
-
-app.get('/mapId', (req, res) => {
-    res.send(process.env.MAPBOX_TOKEN)
-});
 
 app.use("/", userRoutes)
 app.use("/campgrounds", campgrounds)
