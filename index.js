@@ -27,7 +27,7 @@ const app = express();
 
 const corsOptions = {
     // origin: "http://localhost:5173",
-    origin: true,
+    origin: "https://yelpfrontend.vercel.app",
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 };
 
